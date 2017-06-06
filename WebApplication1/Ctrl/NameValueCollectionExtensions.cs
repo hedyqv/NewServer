@@ -12,7 +12,6 @@ namespace WebApplication1.Ctrl
     {
         public static object ToEntity(this NameValueCollection url, Type type)
         {
-
             var allKey = url.AllKeys;
             var ps = type.GetProperties();//获得公共成员
             object obj = Activator.CreateInstance(type); //创建类型对象
