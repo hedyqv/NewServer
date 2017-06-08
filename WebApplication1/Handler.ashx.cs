@@ -39,7 +39,8 @@ namespace WebApplication1
             object getData = null;
 
             //get请求
-            if (request.HttpMethod == "GET") {
+            if (request.HttpMethod == "GET")
+            {
                 if (methodInfo.GetParameters().Length > 0)
                 {
 
@@ -60,10 +61,11 @@ namespace WebApplication1
                     getData = methodInfo.Invoke(obj, null);
                 }
             }
-            
+
 
             //post请求
-            if (request.HttpMethod == "POST") {
+            if (request.HttpMethod == "POST")
+            {
                 string documentContents;
                 using (Stream receiveStream = request.InputStream)
                 {
@@ -77,9 +79,10 @@ namespace WebApplication1
                 {
                     getData = methodInfo.Invoke(obj, new object[] { documentContents });
                 }
-                else { 
+                else
+                {
                     JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-                    var  routes_list = json_serializer.DeserializeObject(documentContents);
+                    var routes_list = json_serializer.Deserialize(documentContents, methodInfo.GetParameters()[0].ParameterType);
                     getData = methodInfo.Invoke(obj, new object[] { routes_list });
                 }
             }
